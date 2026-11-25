@@ -17,10 +17,12 @@ ENTRY = ("The server took my order, brought me five days of work, "
          "and forgot the weekend. One star.")
 
 MAX_CHARS = 180
+MAX_WORDS = 25
 
 
 def validate(text):
-    """Enforce the competition gate: 1-180 chars, not only whitespace."""
+    """Enforce the competition gate: 1-180 chars, not only whitespace,
+    and the task's own cap of at most 25 words on a single line."""
     if not isinstance(text, str):
         raise ValueError("entry must be text")
     if len(text) == 0:
@@ -28,6 +30,10 @@ def validate(text):
     if len(text) > MAX_CHARS:
         raise ValueError(
             f"entry is {len(text)} characters, over the 180-character gate"
+        )
+    if len(text.split()) > MAX_WORDS:
+        raise ValueError(
+            f"entry is {len(text.split())} words, over the 25-word cap"
         )
     if text.strip() == "":
         raise ValueError("entry is only whitespace")
@@ -44,6 +50,7 @@ def self_test():
         ("", "empty"),
         (" ", "whitespace-only"),
         ("x" * 181, "181 chars"),
+        ("word " * 25 + "word", "26 words"),
         ("a\nb", "multi-line"),
         ("trailing ", "trailing whitespace"),
         (" leading", "leading whitespace"),
@@ -80,7 +87,7 @@ def main():
         roundtrip = fh.read()
     if roundtrip != data:
         raise SystemExit("round-trip mismatch: file does not match entry")
-    print(f"wrote {out_path}: {len(text)} chars, "
+    print(f"wrote {out_path}: {len(text)} chars, {len(text.split())} words, "
           f"sha256 {hashlib.sha256(data).hexdigest()}")
     return 0
 
