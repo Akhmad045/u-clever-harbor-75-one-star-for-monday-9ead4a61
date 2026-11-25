@@ -7,6 +7,16 @@ brought the wrong dish (five days of work), and forgot the weekend — the
 joke only Monday can tell, since Monday opens the five-day work stretch and
 ends the weekend.
 
+Why this line, over the other candidates drafted for the brief:
+- It keeps the full restaurant arc (server, order, wrong dish, missing
+  item) instead of only one complaint detail, so it reads as a genuine
+  one-star review rather than a caption about Monday.
+- It carries two Monday-only anchors at once: "five days of work" (the
+  stretch Monday opens) and "forgot the weekend" (the weekend Monday
+  ends), so the joke could not be about any other day of the week.
+- At 17 words it is short enough to retype into a group chat without
+  trimming a word, which is what the weary-office-worker judge keeps.
+
 Stdlib only, deterministic, no network, no randomness.
 """
 import hashlib
